@@ -1,0 +1,13 @@
+# Versioning – Tattler Project
+
+This file tracks the version history of the Tattler project following the XXX Versioning Guidelines.
+
+## Version 1.0.0
+- Initial project setup for Sprint 1
+- MongoDB database created with collections: `restaurants` and `users`
+- CSV files prepared for data import
+- MongoDB indexes created
+- Scripts for importing CSVs into MongoDB added (`import_restaurants.ps1`)
+- Database backup (`backup/tattler/`) included
+- README.md created
+- Screenshots of MongoDB Compass collections and indexes added
