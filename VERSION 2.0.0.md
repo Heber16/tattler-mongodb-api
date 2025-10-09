@@ -13,7 +13,7 @@ This file tracks the version history of the Tattler project following the XXX Ve
 - Screenshots of MongoDB Compass collections and indexes added
 
 ## Version 2.0.0
---Sprint 2 – RESTful API Implementation
+- Sprint 2 RESTful API Implementation
 - Developed RESTful API using Express.js and MongoDB.
 - Implemented GET and POST endpoints for `restaurants` and `users`.
 - Connected API to MongoDB database.
