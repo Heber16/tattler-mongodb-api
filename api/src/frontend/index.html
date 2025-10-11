@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tattler MongoDB API - Restaurants</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f9f9f9;
+    }
+    h1, h2 { color: #333; }
+    input, button {
+      margin: 5px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background-color: #0056b3; }
+    ul { list-style-type: none; padding: 0; }
+    li {
+      background-color: white;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>🍽️ Restaurants Dashboard</h1>
+
+  <div>
+    <input type="text" id="name" placeholder="Restaurant name">
+    <input type="text" id="cuisine" placeholder="Cuisine type">
+    <input type="number" id="rating" placeholder="Rating (1-5)">
+    <input type="text" id="location" placeholder="Location">
+    <button id="addRestaurant">Add Restaurant</button>
+  </div>
+
+  <div>
+    <h2>Search & Sort</h2>
+    <input type="text" id="search" placeholder="Search by name, cuisine or location">
+    <button id="btnSearch">Search</button>
+    <button id="btnSortAsc">Sort by Rating (ASC)</button>
+    <button id="btnSortDesc">Sort by Rating (DESC)</button>
+  </div>
+
+  <h2>Restaurant List</h2>
+  <ul id="restaurants"></ul>
+
+  <script>
+    const apiUrl = 'http://localhost:3000/api/restaurants';
+
+    async function loadRestaurants(query = '') {
+      const res = await fetch(apiUrl + query);
+      const data = await res.json();
+      const list = document.getElementById('restaurants');
+      list.innerHTML = '';
+
+      if (data.length === 0) {
+        list.innerHTML = '<li>No restaurants found</li>';
+        return;
+      }
+
+      data.forEach(r => {
+        const item = document.createElement('li');
+        item.textContent = `${r.name} - ${r.cuisine} - ${r.location} - Rating: ${r.rating}`;
+        list.appendChild(item);
+      });
+    }
+
+    document.getElementById('addRestaurant').addEventListener('click', async () => {
+      const name = document.getElementById('name').value;
+      const cuisine = document.getElementById('cuisine').value;
+      const rating = parseInt(document.getElementById('rating').value);
+      const location = document.getElementById('location').value;
+
+      if (!name || !cuisine || !location || isNaN(rating)) {
+        alert('Please fill all fields correctly');
+        return;
+      }
+
+      await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, cuisine, rating, location })
+      });
+
+      document.getElementById('name').value = '';
+      document.getElementById('cuisine').value = '';
+      document.getElementById('rating').value = '';
+      document.getElementById('location').value = '';
+
+      loadRestaurants();
+    });
+
+    document.getElementById('btnSearch').addEventListener('click', () => {
+      const search = document.getElementById('search').value;
+      loadRestaurants(`?search=${encodeURIComponent(search)}`);
+    });
+
+    document.getElementById('btnSortAsc').addEventListener('click', () => {
+      loadRestaurants('?sort=rating');
+    });
+
+    document.getElementById('btnSortDesc').addEventListener('click', () => {
+      loadRestaurants('?sort=-rating');
+    });
+
+    loadRestaurants();
+  </script>
+</body>
+</html>
+
