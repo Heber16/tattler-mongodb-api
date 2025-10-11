@@ -19,3 +19,6 @@ This file tracks the version history of the Tattler project following the XXX Ve
 - Connected API to MongoDB database.
 - Tested API functionality using Postman.
 - Added project structure and documentation.
+
+## v3.0.0
+– Completed React front-end integration with API 
