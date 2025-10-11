@@ -1,69 +1,96 @@
-# Tattler MongoDB API
+## Tattler – JSON to MongoDB API & React Client
 
-## Description
-This project is a RESTful API for Tattler, a restaurant directory application.  
-It allows users to interact dynamically with restaurants and users data stored in MongoDB.  
-The API provides endpoints to add new restaurants and users, retrieve existing data, and is designed for future expansion (update, delete, search, filter, etc.).
+Overview
 
----
+Tattler is a web application that manages restaurant data using a Node.js + Express + MongoDB API and a React front-end.
+The project was developed under the Scrum methodology and completed in 3 sprints.
 
-## Installation
+The system allows users to:
 
-1. Make sure you have **Node.js** and **MongoDB** installed.
-2. Clone this repository:
-```bash
-git clone https://github.com/Heber16/tattler-mongodb-api.git
-Navigate to the api folder:
+View a list of restaurants.
 
-cd tattler-mongodb-api/api
-Install dependencies:
+Search restaurants by name or cuisine.
 
+Sort restaurants by rating or name.
+
+Add new restaurants through the front-end interface.
+
+Technologies Used
+
+Back-End:
+
+Node.js
+
+Express.js
+
+MongoDB (Mongoose ODM)
+
+Front-End:
+
+React (Create React App)
+
+Fetch API for backend integration
+
+Other Tools:
+
+Git & GitHub for version control
+
+Postman for API testing
+
+🚀 How to Run the Project
+1. Clone the repository:
+git clone https://github.com/yourusername/tattler-mongodb-api.git
+cd tattler-mongodb-api
+
+2. Start the backend
+cd tattler-api
 npm install
-Start the server:
+npm start
 
-node src/app.js
-Make sure MongoDB is running (mongod or via MongoDB Compass).
 
-Usage
-Use Postman or Insomnia to interact with the API.
+The API runs on http://localhost:3000
 
-Restaurants Endpoints
-GET /api/restaurants
-Retrieve all restaurants.
+3. Start the frontend
+cd tattler-client
+npm install
+npm start
 
-POST /api/restaurants
-Add a new restaurant. Body example:
 
-json
-{
-  "name": "Pizza House",
-  "address": "Calle del Sol 789",
-  "cuisine": "Italian",
-  "rating": 4
-}
-Users Endpoints
-GET /api/users
-Retrieve all users.
+The React app runs on http://localhost:3001
+ (or another port if 3000 is in use)
 
-POST /api/users
-Add a new user. Body example:
+📊 Sprint Breakdown
+Sprint 1 – Database Setup
 
-json
-{
-  "name": "Juan Pérez",
-  "email": "juan@example.com",
-  "password": "123456"
-}
+Created MongoDB collections from CSV data.
 
-Project Structure
-api/
-├── src/
-│   ├── app.js           # Main server file
-│   ├── models/
-│   │   ├── Restaurant.js
-│   │   └── User.js
-│   └── routes/
-│       ├── restaurants.js
-│       └── users.js
-├── package.json
-└── package-lock.json
+Implemented basic CRUD structure.
+
+Uploaded initial dataset.
+
+Repository and documentation setup.
+
+Sprint 2 – API Integration
+
+Developed Express routes for CRUD operations.
+
+Implemented search and filtering features.
+
+Tested API endpoints using Postman.
+
+Sprint 3 – Front-End Development
+
+Built React interface to display restaurants.
+
+Added search and sorting features.
+
+Connected front-end with API.
+
+Final testing and version documentation.
+
+Example API Endpoints
+Method	Endpoint	Description
+GET	/api/restaurants	Retrieve all restaurants
+GET	/api/restaurants?search=pasta	Search restaurants by name
+POST	/api/restaurants	Add a new restaurant
+GET	/api/restaurants?sort=rating	Sort restaurants by rating
